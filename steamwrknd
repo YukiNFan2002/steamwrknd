@@ -1,0 +1,20 @@
+#!/bin/bash
+
+attempt=1
+
+while true; do
+    output=$(steam 2>&1)  
+    echo "ATTEMPT_$attempt: $output"
+
+# hopefully echoes attempts output and adds 1 attempt 
+# each looparound and also prints attempt at each error
+
+    if [[ $output == *"_ExitOnFatalAssert"* ]]; then
+        echo "ERROR LAUNCHING STEAM. ATTEMPT #_$attempt"
+	attempt=$((attempt + 1))
+        sleep 1
+    else
+        echo "ENJOY."
+    fi
+done
+
